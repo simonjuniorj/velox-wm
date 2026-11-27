@@ -1,0 +1,49 @@
+[package]
+name = "velox-wm"
+version = "0.6.0"
+edition = "2024"
+description = "A smooth, adaptive Wayland compositor and integrated desktop shell written in Rust"
+license = "GPL-3.0-or-later"
+repository = "https://github.com/simonjuniorj/velox-wm"
+
+[lib]
+name = "velox_wm"
+path = "src/lib.rs"
+
+[[bin]]
+name = "velox-wm"
+path = "src/main.rs"
+
+[[bin]]
+name = "velox-settings"
+path = "src/bin/velox_settings.rs"
+
+[dependencies]
+smithay = { version = "0.7.0", default-features = false, features = [
+    "wayland_frontend",
+    "backend_winit",
+    "backend_udev",
+    "backend_drm",
+    "backend_gbm",
+    "backend_libinput",
+    "backend_session_libseat",
+    "backend_egl",
+    "renderer_gl",
+    "desktop",
+    "xwayland",
+] }
+smithay-client-toolkit = { version = "0.19", default-features = false, features = ["calloop"] }
+wayland-client = "0.31"
+calloop = "0.14"
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+bitflags = "2"
+xkbcommon = "0.8"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+toml = "0.8"
+image = { version = "0.25", default-features = false, features = ["png", "jpeg", "webp"] }
+drm-fourcc = "2.2"
+xcursor = "0.3"
+fontdue = "0.9"
+libc = "0.2"

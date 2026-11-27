@@ -1,0 +1,9 @@
+[Desktop Entry]
+Name=Velox Settings
+Comment=Configure Velox WM appearance, display refresh rate, shortcuts, audio routing, and background apps
+Exec=velox-settings
+Icon=preferences-system
+Terminal=false
+Type=Application
+Categories=Settings;DesktopSettings;System;
+Keywords=velox;settings;display;audio;shortcuts;wallpaper;theme;

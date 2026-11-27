@@ -1,0 +1,20 @@
+# Rust / Cargo build outputs
+/target/
+**/*.rs.bk
+*.pdb
+
+# Editors & swap files
+*.swp
+*.swo
+*~
+.vscode/
+.idea/
+
+# OS / local environment files
+.DS_Store
+.env
+*.local.toml
+
+# Local logs & snapshots
+*.log
+velox-wm-*.log

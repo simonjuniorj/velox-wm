@@ -1,0 +1,23 @@
+#!/bin/sh
+set -eu
+
+export XDG_SESSION_TYPE=wayland
+export XDG_CURRENT_DESKTOP=velox
+export MOZ_ENABLE_WAYLAND=1
+export QT_QPA_PLATFORM=wayland
+export ELECTRON_OZONE_PLATFORM_HINT=auto
+export VELOX_SUPERVISED=1
+
+LOG_DIR="${XDG_STATE_HOME:-$HOME/.local/state}/velox-wm"
+mkdir -p "$LOG_DIR"
+
+while true; do
+    status=0
+    /usr/local/bin/velox-wm --drm >>"$LOG_DIR/velox.log" 2>&1 || status=$?
+    if [ "$status" -eq 42 ]; then
+        echo "[velox-session] Seamless reload requested (exit 42); starting updated velox-wm..." >>"$LOG_DIR/velox.log"
+        sleep 0.1
+        continue
+    fi
+    exit "$status"
+done

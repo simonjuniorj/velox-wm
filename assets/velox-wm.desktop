@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Velox WM
+Comment=Lightweight, smooth Rust/Smithay Wayland compositor
+Exec=/usr/local/bin/velox-session
+Type=Application
+DesktopNames=velox
