@@ -646,7 +646,7 @@ impl Default for Config {
             idle_inhibit_on_video: true,
             lock_on_sleep: false,
             check_github_updates: true,
-            github_update_repo: String::new(),
+            github_update_repo: "simonjuniorj/velox-wm".to_string(),
             saved_volume_pct: None,
             saved_muted: None,
             saved_mic_volume_pct: None,
