@@ -5,109 +5,122 @@
 <h1 align="center">⚡ Velox WM</h1>
 
 <p align="center">
-  <b>A lightweight, ultra-responsive 144Hz+ Wayland compositor and integrated desktop shell built in Rust with Smithay.</b>
+  <b>A smooth, adaptive Wayland compositor and integrated desktop shell written in Rust with Smithay.</b><br/>
+  <sub>Lightweight on VRAM &bull; Works across any display refresh rate (60Hz–240Hz+ &amp; VRR) &bull; Built to unify bar, launcher, settings &amp; notifications in one stack</sub>
 </p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Rust-2024%20Edition-DEA584?style=flat&logo=rust&logoColor=white" alt="Rust 2024">
   <img src="https://img.shields.io/badge/Compositor-Smithay%200.7-5C6BC0?style=flat&logo=linux&logoColor=white" alt="Smithay 0.7">
   <img src="https://img.shields.io/badge/Protocol-Wayland%20%2B%20XWayland-FFBC00?style=flat&logo=wayland&logoColor=black" alt="Wayland + XWayland">
-  <img src="https://img.shields.io/badge/Status-Active%20Development%20(v0.6.0)-orange?style=flat" alt="Status: Active Development">
+  <img src="https://img.shields.io/badge/License-GPL--3.0-blue?style=flat" alt="License: GPL-3.0">
+  <img src="https://img.shields.io/badge/Status-Early%20Dev%20(v0.6.0)-orange?style=flat" alt="Status: Early Development">
   <a href="https://github.com/simonjuniorj"><img src="https://img.shields.io/badge/Author-simonjuniorj-181717?style=flat&logo=github&logoColor=white" alt="GitHub simonjuniorj"></a>
 </p>
 
 <p align="center">
-  <a href="#-news--updates-aktualno%C5%9Bci">News & Updates</a> &nbsp;&middot;&nbsp;
-  <a href="#-lightweight-design--memory-footprint">RAM & Footprint</a> &nbsp;&middot;&nbsp;
+  <a href="#-news--updates-aktualno%C5%9Bci">News &amp; Updates</a> &nbsp;&middot;&nbsp;
+  <a href="#-known-bugs--current-limitations">Known Bugs</a> &nbsp;&middot;&nbsp;
+  <a href="#-resource-usage-ram-vs-vram">RAM &amp; VRAM</a> &nbsp;&middot;&nbsp;
   <a href="#-key-features">Features</a> &nbsp;&middot;&nbsp;
   <a href="#-keyboard-shortcuts">Shortcuts</a> &nbsp;&middot;&nbsp;
   <a href="#-installation">Install</a> &nbsp;&middot;&nbsp;
   <a href="#-uninstallation">Uninstall</a> &nbsp;&middot;&nbsp;
   <a href="#-roadmap--to-do">To-Do</a> &nbsp;&middot;&nbsp;
-  <a href="#-contributing--bug-reporting">Contribute</a> &nbsp;&middot;&nbsp;
-  <a href="#-more-projects-by-simonjuniorj">Other Projects</a>
+  <a href="#-more-projects-by-simonjuniorj">Other Projects</a> &nbsp;&middot;&nbsp;
+  <a href="#-contributing--bug-reporting">Contribute</a>
 </p>
 
 ---
 
 > [!WARNING]
-> **Active Early Development Notice:**
-> **Velox WM (`v0.6.0`) is NOT a finished 1.0 product.** It is under active development—features, config layouts, and visuals are evolving rapidly, and things may occasionally behave unexpectedly.
-> If you run into **bugs, visual glitches, frame stutters, XWayland quirks, or multi-monitor issues**, please report them on [GitHub Issues](../../issues) using the [Bug / Glitch / Stutter Report template](.github/ISSUE_TEMPLATE/bug_report.md) along with logs from `~/.local/state/velox-wm/velox.log`. Every report helps make Velox smoother and more reliable!
+> **Not a Finished Product — Active Early Development Notice**
+> **Velox WM (`v0.6.0`)** is **under active development** (the project started just yesterday, on **2026-11-26**). Expect rapid changes, rough edges, and occasional bugs, glitches, or stutters.
+> Please **report any bugs, visual glitches, memory spikes, XWayland issues, or frame stutters** in [GitHub Issues](../../issues) using the [Bug / Glitch / Stutter Report template](.github/ISSUE_TEMPLATE/bug_report.md) and attach `~/.local/state/velox-wm/velox.log`.
 
 ---
 
 ## 📰 News & Updates (Aktualności)
 
-- **2026-11-27** 🧩 **Minimal View, Custom Quick Tiles & Fractional Scaling (`v0.6.0`)**:
-  - Added **Minimal View** cards for underscaled or compact windows (`< 340×220` or below client `min_size`, with double-click / right-click expand) to prevent app overflow and UI glitches.
-  - Added customizable Quick Access pill ordering and visibility (`notif`, `bg_processes`, `control`, `wifi`, `bright`, `vol`, `float`) from **Quick Settings** and **Velox Settings**.
-  - Added `wp_fractional_scale_manager_v1` support, fixed scaled pointer alignment in `velox-settings`, added CJK/Nerd/Powerline (`︱`) symbol fallback fonts, added `>_` terminal taskbar badges (including Alacritty), stabilized fullscreen-exit geometry, and fixed multi-surface `24/60fps` cadence detection under `144Hz` video battery saver.
-- **2026-11-27** 🔔 **Pixel-Inspired Notifications, Idle Power & App Library Rules (`v0.6.0`)**:
-  - Added on-device Notification Organizer categories, conversation summaries, notification burst cooldown, snooze, priority conversations, and per-app mute/disable toggles.
-  - Added right-click App Library editing, custom keyword category detection rules, idle screen dimming, DPMS display sleep, and integrated Lock Screen (`Super+L`).
-- **2026-11-26** ⚡ **Velox Shell, Audio Roles, VRR & Seamless Reload Baseline (`v0.6.0`)**:
-  - Introduced the ChromeOS-inspired shelf, Start Menu launcher, standalone zero-toolkit `velox-settings` GUI, `pactl` Comms vs Media audio routing, Game Focus pointer confinement, and snapshot-based seamless LightDM reload (`install.sh --reload` / `exit 42`).
+- **2026-11-27** 🚀 **First Public GitHub Push Prep, Transparency Pass & Shell Polish (`v0.6.0`)**:
+  - Updated repository documentation with honest real-world RAM/VRAM metrics, a **Known Bugs** tracker, **GNU GPL-3.0** licensing, and links uniting **Velox WM** with our wider GitHub project ecosystem (`Cloudi`, `Yukki-Bot`, `SheepBot`, `srednia`).
+  - Shipped **Minimal View** cards for overly narrow/cramped or underscaled windows (`< 340×220` or below client `min_size`, with double-click / right-click expand).
+  - Added customizable Quick Access tile ordering and visibility (`notif`, `bg_processes`, `control`, `wifi`, `bright`, `vol`, `float`), `wp_fractional_scale_manager_v1` support, scaled pointer alignment fixes in `velox-settings`, Nerd/Powerline/CJK (`︱`) fallback fonts, `>_` terminal taskbar badges (including Alacritty), fullscreen-exit bounds fixes, and multi-surface `24/60fps` cadence detection for Video Battery Saver.
+- **2026-11-27** 🔔 **Pixel-Inspired Notifications, Idle Power & Editable App Library (`v0.6.0`)**:
+  - Added on-device Notification Organizer categories, conversation recaps, burst Cooldown audio ducking, snooze, priority conversations, and per-app mute/disable toggles.
+  - Added right-click App Library quick editing, custom keyword category rules, idle screen dimming, DPMS display sleep, and integrated Lock Screen (`Super+L`).
+- **2026-11-26** 🌱 **Project Born — Joining the `simonjuniorj` Ecosystem (`v0.6.0`)**:
+  - **Velox WM was created yesterday (`2026-11-26`)!** Expanding beyond our earlier Discord bots and C# utilities into low-level Linux desktop engineering: built a Rust/Smithay Wayland compositor with ChromeOS-inspired shelf, Start Menu, zero-toolkit `velox-settings` GUI, PipeWire audio role routing, Game Focus pointer confinement, and LightDM snapshot reload (`exit 42`).
 
 ---
 
-## 🪶 Lightweight Design & Memory Footprint
+## ⚠️ Known Bugs & Current Limitations
 
-Most Linux Wayland setups assemble 6–10 separate processes (compositor + bar + launcher + notification daemon + lock screen + GTK/Qt/Electron settings apps + tray applets), inflating baseline RAM usage and IPC overhead.
+We believe in being completely upfront about what works cleanly and what still needs fixing:
 
-Velox WM keeps **everything unified in two lean native Rust binaries**:
+1. **System RAM Growth Over Time (`~280–350 MB` typical → up to `~800 MB` spike):**
+   On a real multi-app desktop session, `velox-wm` typically sits around **280–350 MB RSS**, and under prolonged usage or certain workloads has been observed climbing toward **~800 MB** for a still-unidentified reason (likely retained pixel/surface buffers or XWayland state accumulation). Investigation and heap profiling are high priority.
+2. **Pre-1.0 Visual Glitches & Occasional Stutters:**
+   Rapid fullscreen transitions, monitor hotplug/refresh changes, or fast drag-resizing on mixed refresh-rate monitors can occasionally stutter or misalign a frame depending on your GPU driver and client toolkit.
+3. **XWayland App & Game Focus Quirks:**
+   Some X11/Proton fullscreen windows aggressively fight `ConfigureRequest` sizing or Alt+Tab stacking; report specific titles so focus/geometry rules can be refined.
+4. **No `xdg-desktop-portal` Screen Capture Yet:**
+   PipeWire screen sharing (OBS, Discord, browser screen share) and native screenshot/recording portals are planned on the roadmap and not implemented yet.
+5. **External Notification Bridge Process:**
+   The integrated `org.freedesktop.Notifications` D-Bus listener currently spawns a small `python3` + PyGObject (`gi.repository.Gio`) bridge until a pure-Rust `zbus` daemon replaces it.
 
-- **In-process shell rasterizer (`velox-wm`):** Draws the taskbar/shelf, Start Menu, Quick Settings, Audio Mixer, Notification Center, Task View, Alt+Tab switcher, Lock Screen, and Minimal View cards directly into Wayland/GL surfaces—zero external panel or widget daemon processes required.
-- **Zero-toolkit Settings GUI (`velox-settings`):** Rendered directly via `smithay-client-toolkit` + `wl_shm` + `fontdue`, linking only `libc`, `libgcc_s`, and `libxkbcommon` (zero GTK, Qt, Electron, or WebKit dependencies).
-- **Active memory hygiene (`src/mem_cache.rs`):** Reads `/proc/self/status` (`VmRSS`) live, trims glyph & pixel caches automatically, releases unused glibc heap arenas back to the Linux kernel via `libc::malloc_trim(0)`, and throttles commits for hidden/minimized/occluded windows (`freeze_hidden_windows`).
+---
 
-### Footprint & RAM Usage
+## 🪶 Resource Usage (RAM vs VRAM)
 
-| Component | Release Binary Size | Live RAM Usage & Architecture Notes |
+Instead of pretending Velox uses an unrealistic 20 MB while bundling a full desktop shell, launcher, notifications, lock screen, and settings GUI in-process, here is the real footprint observed on actual hardware:
+
+- **Lightweight on VRAM:** No heavy blur passes, reflection shaders, Chromium/Electron renderers, or bloated toolkit GPU textures—compositing sticks to lean DRM/KMS/EGL buffers and direct surface composition, keeping **VRAM usage minimal** across high-res and multi-monitor setups (great for gaming and integrated GPUs).
+- **Unified Process Footprint (No Daemon Soup):** Replaces separate compositor + panel (`waybar`/`eww`) + launcher (`rofi`/`fuzzel`) + notification daemon (`dunst`/`mako`) + lock screen + GTK/Qt settings apps with two binaries (`velox-wm` & on-demand `velox-settings`).
+- **Active Memory Hygiene (`src/mem_cache.rs`):** Built-in `/proc/self/status` `VmRSS` tracking, automatic glyph/pixel cache trimming, `libc::malloc_trim(0)` heap release, and commit throttling for minimized/hidden/occluded windows (`freeze_hidden_windows`).
+
+| Component | Binary Size (`release`) | Observed Resource Footprint |
 | --- | --- | --- |
-| `velox-wm` (Compositor + Shell + XWayland) | `16.6 MiB` (`17,384,304` bytes) | Live idle RSS: **`<!-- TODO: paste your measured idle MB from Velox Settings -> RAM & Cache or ps -->` MB** (check exact live RSS inside **Velox Settings → RAM & Cache** or via `ps -C velox-wm -o pid,rss,vsz,comm`) |
-| `velox-settings` (GUI Control Center) | `4.2 MiB` (`4,418,512` bytes) | Launches on demand; zero toolkit runtime dependencies |
-| `velox-session` (Reload supervisor) | `612` bytes | Lightweight POSIX shell supervisor handling seamless exit-`42` reloads |
+| `velox-wm` (Compositor + Shell + XWayland) | `16.6 MiB` (`17,384,304` bytes) | **VRAM:** Very low / minimal compositor overhead &bull; **RAM:** `~280–350 MB` RSS typical (known creep bug can reach `~800 MB` — see [Known Bugs](#-known-bugs--current-limitations)) |
+| `velox-settings` (Zero-Toolkit GUI) | `4.2 MiB` (`4,418,512` bytes) | On-demand only; software `wl_shm` UI linking just `libc`, `libgcc_s`, and `libxkbcommon` (zero GTK/Qt/Electron) |
+| `velox-session` (Reload supervisor) | `612` bytes | POSIX shell wrapper supervising LightDM seamless reload (`exit 42`) |
 
 ---
 
 ## 🚀 Key Features
 
-### Window Management & Smooth Rendering
-- **3 Workspace Modes:** Switch instantly between **Master-Stack (`Tile`)**, **Columns (`Cols`)**, and **Floating (`Float`)** across 9 virtual workspaces (`Super+1..9`).
-- **Deterministic Unfullscreen & Animations:** Stable workspace window ordering, GPU animations, Aero/Edge Drag Snap Zones, floating geometry preservation, and pre-ack unfullscreen hold so exiting fullscreen returns windows cleanly inside monitor bounds.
-- **Minimal View for Cramped / Underscaled Windows:** Shrinks tiny or over-constrained windows cleanly into interactive Minimal Cards instead of clipping client UIs; double-click or right-click to expand back cleanly.
-- **Fractional Scaling & XWayland:** Supports `wp_fractional_scale_manager_v1`, `wl_viewport`, `wlr`/`ext` data control clipboards, clipboard/primary sync, and full `X11Wm` XWayland support for Steam/Proton games and legacy apps.
-- **Inactive Window Dimming & Opacity:** Highlight focus cleanly across monitors while excluding fullscreen games and videos.
+### Window Management & Adaptive Display Refresh
+- **Three Layout Modes:** Switch live between **Master-Stack (`Tile`)**, **Columns (`Cols`)**, and **Floating (`Float`)** across 9 virtual workspaces (`Super+1..9`).
+- **Any Refresh Rate + VRR (`60Hz`–`240Hz+`):** Not locked to a single rate—configure resolution, exact target Hz (`60`, `75`, `120`, `144`, `165`, etc.), fractional scaling (`0.75`–`3.0`), primary output, and VRR (`Auto` / `AlwaysOn` / `Off`) per monitor with a 15-second keep-or-revert safety modal.
+- **Zero-Black-Screen Video & Idle Battery Saver:** Multi-surface `CommitCadenceTracker` detects `24/25/30/50/60 fps` video playback (including `60fps` streams on higher-refresh panels while excluding games) alongside idle refresh reduction and an optional pass-through Refresh & Battery Saver HUD overlay.
+- **Minimal View for Compact / Underscaled Windows:** Cramped windows (`< 340×220` or smaller than client `min_size`, or toggled via taskbar context menu) cleanly switch into an interactive Minimal Card instead of breaking client layouts; double-click or right-click to expand back.
+- **Fractional Scaling & XWayland:** Supports `wp_fractional_scale_manager_v1`, `wl_viewport`, `wlr`/`ext` data-control clipboards, Wayland/X11 selection sync, and full `X11Wm` XWayland support.
+- **Aero Snap, Deterministic Unfullscreen & Inactive Dimming:** Edge/corner drag-snap zones, preserved pre-fullscreen floating bounds, deterministic workspace tiling order, and focus dimming (excluding fullscreen games and video).
 
 ### ChromeOS-Style Shelf & Customizable Quick Access Panel
-- **Top or Bottom ChromeOS Pill / Full-Width Shelf:** Customizable panel height, opacity, corner radius, 8 accent presets (`Cobalt`, `Violet`, `Emerald`, `Cyan`, `Amber`, `Crimson`, `Rose`, `Mint`), and procedural or custom wallpapers (`~/.config/velox-wm/wallpaper.jpg`/`.png`).
-- **Reorderable & Toggleable Tray Pills:** Move or hide any Quick Access pill (`notif`, `bg_processes`, `control`, `wifi`, `bright`, `vol`, `float`) right inside **Quick Settings → Customize Tiles** or **Velox Settings → Personalize** while popups follow moved tiles.
-- **Unicode, Nerd Font, Emoji & Terminal Recognition:** Fallback font loading including Nerd Fonts, Powerline glyphs, CJK symbols (`︱`), and system emoji; terminal emulators (`alacritty`, `foot`, `kitty`, `wezterm`, `ghostty`, etc.) display `>_` taskbar badges and `"Term"` tags even when `.desktop` declares `Terminal=false`, plus right-click Copy/Paste/Open Another Window actions.
+- **Customizable Shelf & Visuals:** Top or bottom position, floating pill or full-width bar, customizable height/opacity/corner radius, 8 accent presets, and procedural or custom wallpapers (`~/.config/velox-wm/wallpaper.jpg`/`.png`).
+- **Reorderable & Toggleable Tray Pills:** Move or hide Quick Access pills (`notif`, `bg_processes`, `control`, `wifi`, `bright`, `vol`, `float`) from **Quick Settings → Customize Tiles** or **Velox Settings → Personalize** with popups dynamically anchored to moved tiles.
+- **Unicode, Nerd Font, Emoji & Terminal Recognition:** Fallback font stack supporting Nerd Fonts, Powerline glyphs, CJK vertical bars (`︱`), and emoji; terminal emulators (`alacritty`, `foot`, `kitty`, `wezterm`, `ghostty`, etc.) show a `>_` taskbar badge and `"Term"` classification even when `.desktop` sets `Terminal=false`, plus built-in right-click Copy/Paste/Open Another Window controls.
 
 ### Start Menu & Editable App Library
-- **Smart Category Filter:** Automatic or one-click **"Search in All Categories"** fallback when a query has no matches in the active category.
-- **Right-Click Context Menus & Full Overrides:** Right-click any app in the Start Menu or **Velox Settings → Apps & Startup** to launch, switch categories, toggle **Run in Terminal**, cycle **Game Detection (`Auto` / `Force ON` / `Force OFF`)**, hide/unhide, or jump directly to full property editing in `~/.config/velox-wm/app_library.toml` (including custom apps and keyword rules).
+- **Smart Category Switching:** Automatic or one-click **"Search in All Categories"** fallback when a query yields zero matches in the selected category.
+- **Right-Click Context Menus & Custom Rules:** Right-click any app in the Start Menu or **Velox Settings → Apps & Startup** to launch, change categories, toggle **Run in Terminal**, cycle **Game Detection (`Auto` / `Force ON` / `Force OFF`)**, hide/unhide, or jump directly to full metadata editing saved live in `~/.config/velox-wm/app_library.toml` (including custom apps and keyword detection rules).
 
 ### Pixel-OS-Inspired Notifications
-- **Built-in D-Bus Notification Daemon:** Toast popups + Notification Center (`Super+U`) with inline reply drafts, suggested actions (OTP copy, URL launch), snooze, burst Cooldown audio ducking, priority conversations, per-app Disable/Silent controls, and persistent JSON history.
-- **On-Device Organizer & Recaps:** Local keyword bundling and conversation recaps processed completely offline without sending notifications to external servers.
+- **Built-in D-Bus Notification Center:** Toast alerts + Notification Drawer (`Super+U`) with inline reply drafts, suggested actions (OTP copy, URL launch), snooze, burst **Cooldown** audio ducking (up to 1 minute), priority conversations, per-app Mute/Disable toggles, and persistent history (`~/.local/share/velox-wm/notification-history.json`).
+- **On-Device Organizer & Recaps:** Local keyword bundling and quick conversation recaps processed completely on-device without external telemetry.
 
-### Display, Multi-Monitor, Video Battery Saver & Power Management
-- **Per-Monitor Settings:** Configure resolution, refresh rate (`60Hz`–`144Hz+`), fractional scale (`0.75`–`3.0`), primary monitor, and VRR mode (`Auto` / `AlwaysOn` / `Off`) with a 15-second keep-or-revert safety modal.
-- **Zero-Black-Screen Video & Idle Battery Saver:** Multi-surface `CommitCadenceTracker` detects `24/25/30/50/60 fps` video (including `144Hz`-quantized `60fps` streams while excluding games) alongside idle refresh reduction and an optional pass-through Refresh HUD overlay.
-- **Idle Screen Dim, Sleep & Lock Screen:** Automatic screen dimming and DPMS/display sleep timers (with video-playback inhibit and lock-on-sleep) plus a built-in PAM/`unix_chkpwd` Lock Screen (`Super+L` / `Ctrl+Alt+L`).
-
-### Gaming Focus, Audio Roles & Seamless Reload
-- **Game Focus Mode:** Pointer confinement inside focused games across multi-monitor setups (`Alt+Tab` to switch cleanly) plus optional fullscreen taskbar lock.
-- **Audio & Roles (`pactl`):** Master output & microphone sliders, per-device disable toggles, per-stream controls, and automatic **Comms vs Media** device routing.
-- **Seamless Reload Without Losing Layout State:** `install.sh --reload` or `Super+Ctrl+Shift+R` shows an informative pre-reload warning modal, saves a window/workspace/notification snapshot, re-execs `velox-wm` via `velox-session` (`exit 42`), and restores your layout cleanly.
+### Gaming Focus, Audio Roles, Idle Power & Seamless Reload
+- **Game Focus Mode:** Automatically confines pointers inside focused games across multi-monitor setups (`Alt+Tab` to switch windows cleanly) plus optional fullscreen taskbar locking.
+- **Audio & Roles (`pactl`):** Default output/mic controls, device disable toggles, per-stream sliders/mute/device routing, and automatic **Comms vs Media** device routing.
+- **Idle Screen Dim, Sleep & Lock Screen:** Automatic inactivity dimming and DPMS/display sleep timers (with video-playback inhibit & lock-on-sleep) plus built-in PAM/`unix_chkpwd` Lock Screen (`Super+L` / `Ctrl+Alt+L`).
+- **Seamless Reload Without Losing Layout Placement:** `install.sh --reload` or `Super+Ctrl+Shift+R` opens an informative confirmation dialog, saves a workspace/window/notification snapshot, re-execs `velox-wm` cleanly (`exit 42`), and notifies on resume.
 
 ---
 
 ## ⌨️ Keyboard Shortcuts
 
-Default bindings (`windows_shortcuts = true`; configurable in **Velox Settings → Multitasking & Keys**):
+Default bindings (`windows_shortcuts = true`; toggleable in **Velox Settings → Multitasking & Keys**):
 
 | Shortcut | Action |
 | --- | --- |
@@ -121,8 +134,8 @@ Default bindings (`windows_shortcuts = true`; configurable in **Velox Settings �
 | `Super+N` | Toggle Calendar & Focus Timer |
 | `Super+B` / `Ctrl+Shift+Esc` | Active Windows & Background Process Manager |
 | `Super+Tab` | Task View (All Workspaces Overview) |
-| `Alt+Tab` / `Alt+Shift+Tab` | Switch Focused Window (Cross-Monitor Aware) |
-| `Super+Left` / `Super+Right` | Snap Window Left / Right Half |
+| `Alt+Tab` / `Alt+Shift+Tab` | Window Switcher (Cross-Monitor Aware) |
+| `Super+Left` / `Super+Right` | Snap Left / Right Half |
 | `Super+Up` / `Super+Down` | Expand / Maximize or Shrink / Minimize |
 | `Super+M` / `Alt+M` | Toggle Fullscreen |
 | `Super+F` / `Alt+F` | Toggle Floating |
@@ -137,16 +150,16 @@ Default bindings (`windows_shortcuts = true`; configurable in **Velox Settings �
 | `Super+L` / `Ctrl+Alt+L` | Lock Screen |
 | `Super+X` | Power Menu (Lock, Suspend, Reboot, Power Off, Exit) |
 | `Super+Ctrl+Shift+R` | Prompt Snapshot & Seamless WM Reload |
-| `Super+Shift+E` / `Alt+Shift+E` | Exit Velox Session to LightDM |
+| `Super+Shift+E` / `Alt+Shift+E` | Exit Velox Session to Display Manager |
 | `Super + Left Drag` / `Super + Right Drag` | Move Window / Resize Window |
 
 ---
 
 ## 📦 Dependencies & Prerequisites
 
-### Build Dependencies
+### Build Requirements
 - Rust toolchain (`cargo` / `rustc` supporting **Rust 2024 edition**)
-- System libraries: `libseat`, `libinput`, `libudev`, `libdrm`, `libgbm`, `mesa` (EGL/GLES), `libxkbcommon`
+- System libraries & headers: `libseat`, `libinput`, `libudev`, `libdrm`, `libgbm`, `mesa` (EGL / GLES), `libxkbcommon`
 
 On Arch Linux:
 ```bash
@@ -154,12 +167,12 @@ sudo pacman -S --needed rust mesa libdrm libinput libseat libxkbcommon systemd-l
 ```
 
 ### Runtime Companions (Optional / Recommended)
-- **XWayland apps & games:** `xorg-xwayland`
-- **Audio controls & role routing:** `pipewire-pulse` / `pulseaudio` (`pactl`)
-- **Network & Bluetooth pills:** `networkmanager` (`nmcli`), `bluez-utils` (`bluetoothctl`)
-- **D-Bus notifications & clipboard helper:** `python`, `python-gobject`, `wl-clipboard` (`wl-copy`)
-- **Brightness & power:** `/sys/class/backlight` + optional `ddcutil`, `power-profiles-daemon` (`powerprofilesctl`), `polkit-gnome`, `xdg-utils`, `curl`
-- **Display manager:** LightDM (or any DM supporting `/usr/share/wayland-sessions/`)
+- **XWayland apps & Steam/Proton games:** `xorg-xwayland`
+- **Audio mixer & Comms/Media roles:** `pipewire-pulse` / `pulseaudio` (`pactl`)
+- **Wi-Fi & Bluetooth toggles:** `networkmanager` (`nmcli`), `bluez-utils` (`bluetoothctl`)
+- **D-Bus notifications & clipboard:** `python`, `python-gobject`, `wl-clipboard` (`wl-copy`)
+- **Brightness & power:** built-in `/sys/class/backlight` + optional `ddcutil`, `power-profiles-daemon` (`powerprofilesctl`), `polkit-gnome`, `xdg-utils`, `curl`
+- **Display manager:** LightDM (or any DM reading `/usr/share/wayland-sessions/`)
 
 ---
 
@@ -170,45 +183,44 @@ sudo pacman -S --needed rust mesa libdrm libinput libseat libxkbcommon systemd-l
    git clone https://github.com/simonjuniorj/velox-wm.git
    cd velox-wm
    ```
-   *(Update the clone URL above if your fork or repository uses a different name.)*
 
-2. Build and install with [`install.sh`](install.sh):
+2. Build and install using [`install.sh`](install.sh):
    ```bash
    ./install.sh
    ```
-   This builds release binaries (`--offline` first, with automatic online fallback) and installs:
+   This builds release binaries (`--offline` first with automatic online fallback) and installs:
    - `/usr/local/bin/velox-wm`
    - `/usr/local/bin/velox-settings`
    - `/usr/local/bin/velox-session`
    - `/usr/share/wayland-sessions/velox-wm.desktop`
    - `/usr/share/applications/velox-settings.desktop`
 
-3. **Start a Session:** Log out to LightDM and pick **Velox WM**, or test safely inside your current desktop with:
+3. **Start Using Velox WM:** Log out to LightDM and select **Velox WM**, or test nested safely inside an existing Wayland/X11 session:
    ```bash
    cargo run --release --bin velox-wm -- --nested
    ```
 
-4. **Hot-Reload an Active Velox Session After Updating:**
+4. **Hot-Reload After Rebuilding:**
    ```bash
-   ./install.sh --reload      # Opens snapshot & reload confirmation modal
+   ./install.sh --reload      # Opens pre-reload confirmation dialog & creates snapshot
    ./install.sh --reload-now  # Immediate snapshot + reload without modal
    ```
-   *(Tip: set `github_update_repo = "simonjuniorj/velox-wm"` in `~/.config/velox-wm/config.toml` once published so the built-in release watcher tracks new tags.)*
+   *(Optional: set `github_update_repo = "simonjuniorj/velox-wm"` in `~/.config/velox-wm/config.toml` so Velox's built-in updater checks GitHub releases.)*
 
 ---
 
 ## 🗑️ Uninstallation
 
-Run the companion [`uninstall.sh`](uninstall.sh) script:
+Run the included [`uninstall.sh`](uninstall.sh) script:
 ```bash
 ./uninstall.sh
 ```
-By default, your personal settings in `~/.config/velox-wm` are preserved. To delete all Velox configuration, state logs, cache, and notification history as well:
+User configs under `~/.config/velox-wm` are kept intact by default. Pass `--purge-data` to remove user configs, logs, caches, and notification history as well:
 ```bash
 ./uninstall.sh --purge-data
 ```
 
-Manual removal alternative:
+Or remove manually:
 ```bash
 sudo rm -f \
   /usr/local/bin/velox-wm \
@@ -220,52 +232,58 @@ sudo rm -f \
 
 ---
 
-## 📁 Configuration & Data Locations
+## 📁 Configuration & Data Files
 
-| File / Path | Purpose |
+| Path | Purpose |
 | --- | --- |
-| `~/.config/velox-wm/config.toml` | Appearance, tiling, monitors, VRR/battery saver, quick-tile order, notifications, audio roles, shortcuts |
-| `~/.config/velox-wm/app_library.toml` | Custom apps, app overrides (category, badge color, terminal, hidden, game detection), category rules |
-| `~/.config/velox-wm/wallpaper.jpg` / `.png` | Custom wallpaper image when `use_custom_wallpaper = true` |
-| `~/.local/share/velox-wm/notification-history.json` | Persisted notification history & seen-app notification toggles |
-| `~/.local/state/velox-wm/velox.log` | Compositor runtime logs (helpful when reporting bugs or stutters) |
+| `~/.config/velox-wm/config.toml` | Appearance, tiling, per-monitor refresh/scale/VRR, quick-tile order, notifications, audio roles, shortcuts |
+| `~/.config/velox-wm/app_library.toml` | Custom apps, per-app overrides (category, badge, terminal, hidden, game detection), category rules |
+| `~/.config/velox-wm/wallpaper.jpg` / `.png` | Custom wallpaper when `use_custom_wallpaper = true` |
+| `~/.local/share/velox-wm/notification-history.json` | Persisted notification history & seen-app notification settings |
+| `~/.local/state/velox-wm/velox.log` | Compositor runtime logs (attach when reporting bugs, glitches, or stutters) |
 
 ---
 
 ## 🗺️ Roadmap & To-Do
 
-- [ ] **Per-Monitor Independent Workspaces & Hotplug Profiles:** Switch workspaces per physical monitor independently and save automatic docked/undocked display layouts.
-- [ ] **Full Keybind Remapper & Trackpad Gestures:** Graphical shortcut editor inside `velox-settings` plus 3/4-finger libinput swipe gestures for Task View, workspaces, and Show Desktop.
-- [ ] **`xdg-desktop-portal-velox` & Screen Sharing / Screenshots:** PipeWire screen capture for OBS, Discord, and browsers alongside a native region screenshot & screen recorder overlay.
-- [ ] **Pure-Rust Notification D-Bus Engine (`zbus`):** Replace the `python3`/PyGObject helper with an in-process Rust D-Bus server to cut RAM usage and startup latency even further.
-- [ ] **System Tray (`StatusNotifierItem` / AppIndicator):** Render third-party tray icons alongside the customizable Quick Access tiles.
-- [ ] **Lightweight GPU Shaders & Night Light:** Optional background blur for shell surfaces, smooth workspace slide animations, and automatic color-temperature / Night Light schedules.
-- [ ] **Packaging & GitHub Release Pipeline:** Arch Linux AUR `PKGBUILD`, Debian/Fedora packaging, GitHub Actions CI (`cargo test` / `cargo build --release`), and prebuilt release tarballs for one-click updater checks.
-- [ ] **Gaming & DPI Polish:** Per-app XWayland scale tuning, HDR display capability reporting, and custom cursor theme/size selection in `velox-settings`.
-
----
-
-## 🤝 Contributing & Bug Reporting
-
-PRs, performance profiling, bug fixes, and UI ideas are very welcome!
-- Read [CONTRIBUTING.md](CONTRIBUTING.md) for the codebase map, `--nested` dev workflow, and `cargo test --offline` checks.
-- Spotted a glitch, black/misaligned window, stutter, or crash? Open an issue with the [Bug / Glitch / Stutter template](.github/ISSUE_TEMPLATE/bug_report.md) or propose improvements with the [Feature Request template](.github/ISSUE_TEMPLATE/feature_request.md).
+- [ ] **Fix RAM Creep Bug (`~350 MB` → `~800 MB`):** Profile buffer/texture/XWayland retention over long sessions and lock idle memory strictly down.
+- [ ] **Per-Monitor Independent Workspaces & Hotplug Profiles:** Switch workspaces per physical monitor independently and save docked/undocked display profiles.
+- [ ] **Full Keybind Remapper & Trackpad Gestures:** Graphical shortcut editor in `velox-settings` + 3/4-finger libinput swipe gestures for Task View, workspaces, and Show Desktop.
+- [ ] **`xdg-desktop-portal-velox` & Screen Sharing / Screenshots:** PipeWire screen capture for OBS, Discord, and browsers plus built-in region screenshots/recording.
+- [ ] **Pure-Rust Notification D-Bus Bridge (`zbus`):** Replace the `python3`/PyGObject helper with an in-process Rust D-Bus server to shave memory & startup overhead.
+- [ ] **System Tray (`StatusNotifierItem` / AppIndicator):** Native third-party app tray icons inside the Quick Access panel.
+- [ ] **Lightweight GPU Shaders & Night Light:** Opt-in subtle panel blur, workspace slide transitions, and Night Light color temperature schedules.
+- [ ] **CI & Distro Packaging:** GitHub Actions build/test checks, Arch AUR `PKGBUILD`, Debian/Fedora packaging, and GitHub release tarballs for auto-update checks.
+- [ ] **Gaming & Scaling Polish:** Per-app XWayland DPI controls, HDR display reporting, and custom cursor theme/size pickers in `velox-settings`.
 
 ---
 
 ## 🔗 More Projects by [simonjuniorj](https://github.com/simonjuniorj)
 
-Check out my other repositories and past projects on GitHub:
+Other public repositories available on my GitHub profile:
 
-- 🤖 **[Cloudi](https://github.com/simonjuniorj/Cloudi)** *(Archived / Closed Source)* — Advanced Discord administration, SFW media safety scanning, anti-phishing, ticketing, verification, and server logging bot created for the Szkoła w Chmurze server network.
-- 🐾 **[Yukki-Bot](https://github.com/simonjuniorj/Yukki-Bot)** *(Open Source / Free)* — Lightweight, free, database-free Discord bot ready to self-host and customize.
-- 📦 **[All Repositories on GitHub → github.com/simonjuniorj](https://github.com/simonjuniorj?tab=repositories)** — Browse additional tools, scripts, and upcoming projects.
+| Project | Stack | Description |
+| --- | --- | --- |
+| 🤖 **[Cloudi](https://github.com/simonjuniorj/Cloudi)** *(Discontinued)* | JavaScript &bull; Discord.js v14 &bull; MongoDB | Official advanced moderation, SFW media safety scanning, anti-phishing, ticketing & logging Discord bot created for the Szkoła w Chmurze server network |
+| 🐾 **[Yukki-Bot](https://github.com/simonjuniorj/Yukki-Bot)** *(Open Source)* | JavaScript &bull; Discord.js v13 | Multipurpose Discord bot with rich commands and zero database setup required |
+| 🎵 **[SheepBot](https://github.com/simonjuniorj/SheepBot)** | JavaScript &bull; Discord.js v12 | Music bot for Discord servers |
+| 🧮 **[srednia](https://github.com/simonjuniorj/srednia)** | C# | Lightweight utility application for calculating arithmetic means |
+
+👉 Browse everything at **[github.com/simonjuniorj](https://github.com/simonjuniorj?tab=repositories)**
+
+---
+
+## 🤝 Contributing & Bug Reporting
+
+PRs, memory-leak traces, frame-pacing diagnostics, and UI fixes are warmly appreciated:
+- See [CONTRIBUTING.md](CONTRIBUTING.md) for the full module architecture map, `--nested` testing guide, and `cargo test --offline` checks.
+- Hit a bug, memory spike, visual glitch, or frame stutter? Open an issue via [Bug / Glitch / Stutter Report](.github/ISSUE_TEMPLATE/bug_report.md) or propose features via [Feature Request](.github/ISSUE_TEMPLATE/feature_request.md).
 
 ---
 
 ## 📄 License
 
-> No `LICENSE` file has been added yet. Choose and add a license (e.g., `MIT`, `Apache-2.0`, or `GPL-3.0-or-later`) and set `license = "..."` in [Cargo.toml](Cargo.toml) before publishing publicly.
+Licensed under the **GNU General Public License v3.0** — see the [LICENSE](LICENSE) file for full details.
 
 ---
 
@@ -273,23 +291,25 @@ Check out my other repositories and past projects on GitHub:
 
 ## 🇵🇱 Wersja Polska — Velox WM
 
-**Velox WM** to lekki, responsywny kompozytor **Wayland** (`144Hz+`) oraz zintegrowane środowisko pulpitu napisane w języku **Rust** (`smithay`), zaprojektowane z myślą o płynności działania, niskim zużyciu pamięci RAM, grach wielomonitorowych oraz pełnej kontroli bez dziesiątek ciężkich procesów w tle.
+**Velox WM** to płynny, adaptacyjny kompozytor **Wayland** oraz zintegrowane środowisko pulpitu napisane w języku **Rust** (`smithay`), działające na dowolnym odświeżaniu monitora (**60Hz, 75Hz, 120Hz, 144Hz, 240Hz+** oraz **VRR**). Zamiast łączyć kilkanaście osobnych programów, łączy pasek, launcher, powiadomienia, ekran blokady i ustawienia w jednej spójnej całości przy bardzo niskim zużyciu pamięci **VRAM**.
 
-> ⚠️ **Ważna informacja / Projekt w trakcie aktywnego rozwoju:**  
-> Velox WM (`v0.6.0`) **nie jest jeszcze ukończonym produktem**. Projekt jest intensywnie rozwijany, dlatego mogą występować okazjonalne błędy, artefakty graficzne, przycięcia (stutters) lub problemy z kompatybilnością niektórych aplikacji XWayland. Jeśli zauważysz jakikolwiek problem — **zgłoś go przez [GitHub Issues](../../issues)** i dołącz logi z `~/.local/state/velox-wm/velox.log`!
+> ⚠️ **Wczesny etap rozwoju / Produkt nieukończony:**  
+> Projekt powstał **wczoraj (2026-11-26)** i znajduje się we wczesnej fazie rozwoju (`v0.6.0`). Mogą zdarzać się błędy, artefakty graficzne, przycięcia lub wycieki pamięci. Jeśli coś nie działa jak należy — **zgłoś błąd, glitch lub stutter w zakładce [Issues](../../issues)** i dołącz log `~/.local/state/velox-wm/velox.log`.
 
-### 📰 Aktualności (Polskie)
+### 📰 Aktualności
+- **2026-11-27** 🚀 **Publikacja i rozbudowa dokumentacji, sekcja Znanych Błędów, GPL-3.0 oraz polskie poprawki (`v0.6.0`)**: Dodano **Minimal View** dla zbyt małych okien, personalizację kafelków na pasku zadań, `wp_fractional_scale_manager_v1`, naprawę pozycji kursora przy skalowaniu w `velox-settings`, obsługę symboli `︱`/Nerd/Emoji, badge `>_` dla terminali (w tym Alacritty), poprawki powrotu z pełnego ekranu oraz wykrywanie wideo 24/60fps w Video Battery Saver.
+- **2026-11-27** 🔔 **Powiadomienia Pixel, tryb bezczynności i reguły App Library (`v0.6.0`)**: Dodano lokalny organizer i podsumowania powiadomień, tryb Cooldown, Snooze, menu kontekstowe pod PPM w bibliotece aplikacji, przyciemnianie/usypianie ekranu oraz ekran blokady (`Super+L`).
+- **2026-11-26** 🌱 **Narodziny projektu (`v0.6.0`)**: Start **Velox WM** jako zupełnie nowego projektu systemowego uzupełniającego dotychczasowe repozytoria na moim GitHubie ([Cloudi](https://github.com/simonjuniorj/Cloudi), [Yukki-Bot](https://github.com/simonjuniorj/Yukki-Bot), [SheepBot](https://github.com/simonjuniorj/SheepBot), [srednia](https://github.com/simonjuniorj/srednia)).
 
-- **2026-11-27** 🧩 **Minimal View, własna kolejność kafelków i skalowanie ułamkowe (`v0.6.0`)**: Dodano kompaktowy tryb **Minimal View** dla zbyt małych okien, personalizację kolejności/widoczności kafelków szybkiego dostępu na pasku zadań, obsługę `wp_fractional_scale_manager_v1`, naprawę pozycji kursora przy skalowaniu w `velox-settings`, obsługę symboli `︱`/Nerd/Emoji na pasku, badge `>_` dla terminali (w tym Alacritty), poprawki wyjścia z pełnego ekranu oraz stabilniejsze wykrywanie wideo 24/60fps na ekranach 144Hz.
-- **2026-11-27** 🔔 **Powiadomienia w stylu Pixel, oszczędzanie energii i reguły App Library (`v0.6.0`)**: Dodano lokalny organizer powiadomień i podsumowania rozmów (bez wysyłania danych na zewnątrz), tryb wyciszenia serii powiadomień (Cooldown), odkładanie (Snooze), menu kontekstowe pod PPM w bibliotece aplikacji, przyciemnianie ekranu przy bezczynności, uśpienie wyświetlacza oraz ekran blokady (`Super+L`).
-- **2026-11-26** ⚡ **Pierwsza wersja kompozytora 144Hz, panelu i `velox-settings` (`v0.6.0`)**: Pasek w stylu ChromeOS, Menu Start, natywna aplikacja ustawień bez GTK/Qt/Electron, routing audio Comms/Media (`pactl`), blokada kursora w grach oraz bezstratne przeładowanie sesji (`install.sh --reload` / kod wyjścia `42`).
+### ⚠️ Znane błędy i zużycie zasobów
+- **Realne zużycie RAM (~280–350 MB, znany błąd wzrostu do ~800 MB):** Na ten moment podczas normalnej pracy `velox-wm` zajmuje zazwyczaj **280–350 MB RAM**, jednak przy dłuższej sesji występuje **znany problem wzrostu pamięci nawet do ~800 MB** z nieustalonej jeszcze przyczyny (w trakcie diagnozy).
+- **Bardzo lekkie zużycie VRAM:** Kompozytor nie używa ciężkich shaderów rozmycia ani procesów Chromium/Electron/GTK/Qt, więc obciążenie pamięci karty graficznej (**VRAM**) pozostaje minimalne.
+- **Brak jeszcze portalu udostępniania ekranu (`xdg-desktop-portal`):** Nagrywanie / udostępnianie ekranu w Discord/OBS na Waylandzie jest na liście **To-Do**.
 
-### 🪶 Dlaczego tak lekki?
-- **Brak narzutu GTK / Qt / Electron:** Zarówno powłoka (`velox-wm`), jak i panel ustawień (`velox-settings`, rozmiar release `4.2 MiB`, zaledwie 3 biblioteki systemowe: `libc`, `libgcc_s`, `libxkbcommon`) korzystają z własnego lekkiego renderera tekstów i buforów Wayland.
-- **Aktywne zarządzanie RAM:** Wbudowany monitor `/proc/self/status` (`VmRSS`), automatyczne czyszczenie cache glifów i zwalnianie pamięci sterty (`malloc_trim(0)`) oraz zamrażanie ukrytych okien (`freeze_hidden_windows`).
-- **Zmierzone zużycie RAM:** Sprawdź dokładnie na swojej maszynie w **Velox Settings → RAM & Cache** lub poleceniem `ps -C velox-wm -o pid,rss,vsz,comm`.
+### 🔗 Inne moje projekty na GitHubie
+- 🤖 **[Cloudi](https://github.com/simonjuniorj/Cloudi)** *(Zarchiwizowany)* — Zaawansowany bot Discord dla Szkoły w Chmurze (`Discord.js v14`, `MongoDB`)
+- 🐾 **[Yukki-Bot](https://github.com/simonjuniorj/Yukki-Bot)** *(Open Source)* — Wielofunkcyjny bot Discord niewymagający bazy danych (`Discord.js v13`)
+- 🎵 **[SheepBot](https://github.com/simonjuniorj/SheepBot)** — Muzyczny bot Discord (`Discord.js v12`)
+- 🧮 **[srednia](https://github.com/simonjuniorj/srednia)** — Prosta aplikacja w C# do obliczania średniej arytmetycznej
 
-### 🔗 Inne moje projekty
-- 🤖 **[Cloudi](https://github.com/simonjuniorj/Cloudi)** *(Zarchiwizowany)* — Zaawansowany bot Discord dla sieci serwerów Szkoły w Chmurze.
-- 🐾 **[Yukki-Bot](https://github.com/simonjuniorj/Yukki-Bot)** *(Publiczny / Darmowy)* — Lekki bot Discord niewymagający bazy danych.
-- 📦 **[Wszystkie repozytoria — github.com/simonjuniorj](https://github.com/simonjuniorj?tab=repositories)**
+Licencja: **GNU GPL v3.0** ([LICENSE](LICENSE)).
